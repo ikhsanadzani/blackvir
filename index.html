@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Yuros — Selamat datang di halaman resmi kami. Me-linux-kan Indonesia.">
+  <meta name="theme-color" content="#0a0a0a">
+  <title>Yuros</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    /* ============================================
+       RESET & BASE
+       ============================================ */
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      /* Color Tokens — Dark palette */
+      --color-bg: #0a0a0a;
+      --color-text-primary: #f0f0f0;
+      --color-text-secondary: rgba(255, 255, 255, 0.55);
+      --color-text-muted: rgba(255, 255, 255, 0.35);
+      --color-accent: #6c63ff;
+      --color-border: rgba(255, 255, 255, 0.08);
+
+      /* Typography */
+      --font-display: 'Outfit', system-ui, -apple-system, sans-serif;
+      --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+
+      /* Spacing */
+      --space-sm: 1rem;
+      --space-md: 1.5rem;
+      --space-lg: 2rem;
+      --space-xl: 3rem;
+
+      /* Easing */
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    html {
+      font-size: 16px;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background-color: var(--color-bg);
+      color: var(--color-text-primary);
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ============================================
+       HEADER — Logo top-left (abc.xyz style)
+       ============================================ */
+    .header {
+      padding: var(--space-lg) var(--space-xl);
+      opacity: 0;
+      animation: fadeIn 0.6s var(--ease-out) 0.1s forwards;
+    }
+
+    .header__logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+      color: var(--color-text-primary);
+    }
+
+    .header__logo-mark {
+      width: 10rem;
+      height: auto;
+      flex-shrink: 0;
+      object-fit: contain;
+    }
+
+    .header__logo-text {
+      font-family: var(--font-display);
+      font-size: 4rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      color: var(--color-text-primary);
+    }
+
+    /* ============================================
+       MAIN CONTENT — Two-column layout
+       ============================================ */
+    .content {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: var(--space-xl);
+      padding: var(--space-xl);
+      max-width: 1200px;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    .content__text {
+      opacity: 0;
+      animation: fadeSlideUp 0.7s var(--ease-out) 0.25s forwards;
+    }
+
+    .content__greeting {
+      font-family: var(--font-display);
+      font-weight: 500;
+      font-size: clamp(2rem, 5vw, 3.25rem);
+      line-height: 1.2;
+      letter-spacing: -0.025em;
+      color: var(--color-text-primary);
+      margin-bottom: var(--space-md);
+    }
+
+    .content__tagline {
+      font-family: var(--font-body);
+      font-weight: 400;
+      font-size: clamp(1rem, 2.5vw, 1.25rem);
+      line-height: 1.6;
+      color: var(--color-text-secondary);
+      margin-bottom: var(--space-lg);
+    }
+
+    .content__tagline-accent {
+      color: var(--color-accent);
+      font-weight: 500;
+    }
+
+    .content__description {
+      font-family: var(--font-body);
+      font-weight: 300;
+      font-size: clamp(0.875rem, 1.5vw, 1rem);
+      line-height: 1.8;
+      color: var(--color-text-muted);
+      max-width: 480px;
+    }
+
+    /* Media Section */
+    .content__media {
+      opacity: 0;
+      animation: fadeSlideUp 0.7s var(--ease-out) 0.45s forwards;
+    }
+
+    /* Scattered Animals */
+    .scattered-animals {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-content: center;
+      gap: 1.5rem;
+      padding: 1rem;
+    }
+
+    .mascot-card {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.25rem;
+      border-radius: 20px;
+      border: 1px solid var(--color-border);
+      background: rgba(255, 255, 255, 0.02);
+      transition: all 0.35s var(--ease-out);
+      cursor: pointer;
+    }
+
+    .mascot-card__img {
+      width: 64px;
+      height: 64px;
+      object-fit: contain;
+      transition: transform 0.35s var(--ease-out);
+    }
+
+    /* Scatter effect via nth-child */
+    .mascot-card:nth-child(1) { transform: translateY(10px) rotate(-4deg); }
+    .mascot-card:nth-child(2) { transform: translateY(-15px) rotate(3deg); }
+    .mascot-card:nth-child(3) { transform: translateY(5px) rotate(-6deg); }
+    .mascot-card:nth-child(4) { transform: translateY(-5px) rotate(5deg); }
+    .mascot-card:nth-child(5) { transform: translateY(15px) rotate(-2deg); }
+    .mascot-card:nth-child(6) { transform: translateY(-10px) rotate(4deg); }
+    .mascot-card:nth-child(7) { transform: translateY(0px) rotate(-5deg); }
+
+    .mascot-card:hover {
+      background: rgba(255, 255, 255, 0.06);
+      border-color: rgba(255, 255, 255, 0.2);
+      transform: translateY(-10px) scale(1.05) rotate(0deg) !important;
+      z-index: 10;
+    }
+
+    .mascot-card:hover .mascot-card__img {
+      transform: scale(1.15) rotate(5deg);
+    }
+
+    /* ============================================
+       FOOTER — Bottom, minimal (abc.xyz style)
+       ============================================ */
+    .footer {
+      padding: var(--space-md) var(--space-xl);
+      border-top: 1px solid var(--color-border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: var(--space-sm);
+      opacity: 0;
+      animation: fadeIn 0.6s var(--ease-out) 0.6s forwards;
+    }
+
+    .footer__copyright {
+      font-size: 0.8125rem;
+      color: var(--color-text-muted);
+      letter-spacing: 0.01em;
+    }
+
+
+    /* ============================================
+       ANIMATIONS
+       ============================================ */
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+
+    @keyframes fadeSlideUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      from {
+        transform: translateY(16px);
+      }
+    }
+
+    /* ============================================
+       RESPONSIVE
+       ============================================ */
+    @media (max-width: 640px) {
+      .header {
+        padding: var(--space-md);
+      }
+
+      .content {
+        grid-template-columns: 1fr;
+        padding: var(--space-lg) var(--space-md);
+      }
+
+      .scattered-animals {
+        gap: 1rem;
+        padding: 0;
+      }
+
+      .mascot-card {
+        padding: 1rem;
+      }
+
+      .mascot-card__img {
+        width: 48px;
+        height: 48px;
+      }
+
+      .footer {
+        padding: var(--space-md);
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-delay: 0ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Header — Logo top-left -->
+  <header class="header" id="header">
+    <a href="/" class="header__logo" id="logo-link">
+
+        <img
+          src="./assets/img/logo.svg"
+          alt="Yuros"
+          class="header__logo-mark"
+          fetchpriority="high"
+        >
+
+      <span class="header__logo-text">Yuros</span>
+    </a>
+  </header>
+
+  <!-- Main — Welcome content -->
+  <main class="content" id="main-content">
+
+    <!-- Left: Text -->
+    <div class="content__text">
+      <h1 class="content__greeting">Selamat Datang.</h1>
+      <p class="content__tagline">
+        <span class="content__tagline-accent">Y</span> for Yuros
+      </p>
+      <p class="content__description">
+        Me-linux-kan Indonesia
+      </p>
+    </div>
+
+    <!-- Right: Scattered Animals -->
+    <div class="content__media scattered-animals">
+      <div class="mascot-card">
+        <img class="mascot-card__img" src="./assets/img/fox-svgrepo-com.svg" alt="Fox" width="64" height="64" loading="lazy">
+      </div>
+      <div class="mascot-card">
+        <img class="mascot-card__img" src="./assets/img/crab-svgrepo-com.svg" alt="Crab" width="64" height="64" loading="lazy">
+      </div>
+      <div class="mascot-card">
+        <img class="mascot-card__img" src="./assets/img/penguin-svgrepo-com.svg" alt="Penguin" width="64" height="64" loading="lazy">
+      </div>
+      <div class="mascot-card">
+        <img class="mascot-card__img" src="./assets/img/dinosaur-svgrepo-com.svg" alt="Dinosaur" width="64" height="64" loading="lazy">
+      </div>
+      <div class="mascot-card">
+        <img class="mascot-card__img" src="./assets/img/the-cow-svgrepo-com.svg" alt="Cow" width="64" height="64" loading="lazy">
+      </div>
+      <div class="mascot-card">
+        <img class="mascot-card__img" src="./assets/img/turtle-svgrepo-com.svg" alt="Turtle" width="64" height="64" loading="lazy">
+      </div>
+      <div class="mascot-card">
+        <img class="mascot-card__img" src="./assets/img/whale-svgrepo-com.svg" alt="Whale" width="64" height="64" loading="lazy">
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer" id="footer">
+    <p class="footer__copyright" id="footer-copyright"></p>
+  </footer>
+
+  <script>
+    /* Dynamic copyright year */
+    (function initFooter() {
+      var el = document.getElementById('footer-copyright');
+      if (el) {
+        el.textContent = '\u00A9 ' + new Date().getFullYear() + ' Yuros';
+      }
+    })();
+  </script>
+</body>
+</html>
